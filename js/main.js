@@ -24,6 +24,26 @@ fetch("./db.json")
         <button class="btn" id="${item.id}">Elegir Peli</button>`;
         maingaleria.append(divspelis);
     });
+//////////////
+    for (let i = 0; i < peliculas.length; i++) {
+        document.getElementById(`${peliculas[i].id}`).addEventListener("click", () => {
+            datos.pelicula = `${peliculas[i].nombre}`;
+            Toastify({
+                text: `Selecciono la pelicula ${peliculas[i].nombre}`,
+                className: "info",
+                style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast();
+            const pelielegida = document.createElement("div");
+            pelielegida.innerHTML = `
+                <h2>Seleccionó la película: ${peliculas[i].nombre}</h2>
+                <img src="${peliculas[i].imagen}">`
+            peliseleccionada.append(pelielegida);
+            mostrarPeliSelecc();
+            ocultarGaleria();
+        });
+    }
 })
 const dias = [
     {id: "a", dia:"Lunes"},
@@ -139,25 +159,7 @@ combos.forEach((combo) => {
 });
 
 // Creamos un bucle for para seleccionar una película según su id y guardamos su nombre
-for (let i = 0; i < peliculas.length; i++) {
-    document.getElementById(`${peliculas[i].id}`).addEventListener("click", () => {
-        datos.pelicula = `${peliculas[i].nombre}`;
-        Toastify({
-            text: `Selecciono la pelicula ${peliculas[i].nombre}`,
-            className: "info",
-            style: {
-            background: "linear-gradient(to right, #00b09b, #96c93d)",
-            }
-        }).showToast();
-        const pelielegida = document.createElement("div");
-        pelielegida.innerHTML = `
-            <h2>Seleccionó la película: ${peliculas[i].nombre}</h2>
-            <img src="${peliculas[i].imagen}">`
-        peliseleccionada.append(pelielegida);
-        mostrarPeliSelecc();
-        ocultarGaleria();
-    });
-}
+
 
 for (let i = 0; i < dias.length; i++) {
     document.getElementById(`${dias[i].id}`).addEventListener("click", () => {
@@ -184,21 +186,14 @@ horarios.forEach((horario) => {
     });
 });
 //
-function mostrarAlerta (){
-    Swal.fire(
-        'Compra confirmada con exito!',
-        'Puede ver su carrito o deshacer la compra!',
-        'success'
-    );
-}
+
 // Llamamos al botón con id "confirmar" para agregar el evento click
 document.getElementById("confirmar").addEventListener("click", () => {
     
-    mostrarAlerta();
     // Almacenar los datos seleccionados en el localStorage
     localStorage.setItem("carrito", JSON.stringify(datos));
     // Ocultar el contenido actual
-    document.body.innerHTML = '';
+   document.body.innerHTML = ``;
 
     // Mostrar los botones "Ver Resultado" y "Reiniciar Página"
     
@@ -206,7 +201,11 @@ document.getElementById("confirmar").addEventListener("click", () => {
     const carritoButton = document.createElement('button');
     carritoButton.textContent = 'Ver Carrito';
     document.body.append(carritoButton);
-
+    Swal.fire(
+        'Su pelicula ha sido confirmada con exito!',
+        'Puede ver el contenido de su carrito en el boton "ver carrito"!',
+        'success'
+    );
     carritoButton.addEventListener('click', () => {
         // Recuperar los datos del localStorage
         const carrito = JSON.parse(localStorage.getItem("carrito"));
@@ -223,7 +222,10 @@ document.getElementById("confirmar").addEventListener("click", () => {
             <button id="confirmcompra">Confirmar compra.</button>
             <button id="reiniciarpag">Rehacer compra.</button>
         `;
-        
+        Swal.fire(
+        'Si esta de acuerdo con su carrito puede confirmar la compra o rehacerla.!',
+        'saludos'
+    );
         
         // Agregar el div del carrito al cuerpo del documento
         document.body.appendChild(carritoDiv);
@@ -232,7 +234,7 @@ document.getElementById("confirmar").addEventListener("click", () => {
             
             Swal.fire(
                 'Compra realizada con exito!',
-                'You clicked the button!',
+                'Muchas gracias por su compra, vuelva pronto!',
                 'success'
             );
         });
