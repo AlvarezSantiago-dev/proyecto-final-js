@@ -1,0 +1,14 @@
+[
+    { "id": 1, "nombre": "Barbie", "imagen": "../img/peliculabarbie.jpg" },
+    { "id": 2, "nombre": "AlmaMula", "imagen": "../img/peliculaalmamula.jpg" },
+    { "id": 3, "nombre": "Contrareloj", "imagen": "../img/peliculacontrareloj.jpg" },
+    { "id": 4, "nombre": "Asteroid", "imagen": "../img/peliculaasteroid.jpg" },
+    { "id": 5, "nombre": "La Monja", "imagen": "../img/peliculalamonja.jpg" },
+    { "id": 6, "nombre": "Poderes Ocultos", "imagen": "../img/peliculapoderesocultos.jpg" },
+    { "id": 7, "nombre": "Oppenheimer", "imagen": "../img/peliculaoppenheimer.jpg" },
+    { "id": 8, "nombre": "Hablame", "imagen": "../img/peliculahablame.jpg" },
+    { "id": 9, "nombre": "Fragmentada", "imagen": "../img/peliculafragmentada.jpg" },
+    { "id": 10, "nombre": "Gran Turismo", "imagen": "../img/peliculagranturismo.jpg" },
+    { "id": 11, "nombre": "Elementos", "imagen": "../img/peliculaselementos.jpg" },
+    { "id": 12, "nombre": "Megalodon 2", "imagen": "../img/peliculamegalodon2.jpg" }
+]

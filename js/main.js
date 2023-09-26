@@ -1,3 +1,4 @@
+/* pasado a json a formato json.
 const peliculas = [
     { id: 1, nombre: "Barbie", imagen: "../img/peliculabarbie.jpg" },
     { id: 2, nombre: "AlmaMula", imagen: "../img/peliculaalmamula.jpg" },
@@ -12,6 +13,18 @@ const peliculas = [
     { id: 11, nombre: "Elementos", imagen: "../img/peliculaselementos.jpg" },
     { id: 12, nombre: "Megalodon 2", imagen: "../img/peliculamegalodon2.jpg" },
 ];
+*/
+fetch("./db.json")
+.then(response => response.json())
+.then(peliculas => {
+    peliculas.forEach(item => {
+        const divspelis = document.createElement("div");
+        divspelis.innerHTML = `
+        <img src="${item.imagen}">
+        <button class="btn" id="${item.id}">Elegir Peli</button>`;
+        maingaleria.append(divspelis);
+    });
+})
 const dias = [
     {id: "a", dia:"Lunes"},
     {id: "b", dia:"Martes"},
@@ -70,14 +83,8 @@ function mostrarPeliSelecc() {
     peliseleccionada.style.display = "block";
 }
 
-// Recorridos
-peliculas.forEach(item => {
-    const divspelis = document.createElement("div");
-    divspelis.innerHTML = `
-    <img src="${item.imagen}">
-    <button class="btn" id="${item.id}">Elegir Peli</button>`;
-    maingaleria.append(divspelis);
-});
+// Recorrido
+
 dias.forEach(item => {
     const divsdias = document.createElement("div");
     divsdias.innerHTML = `
@@ -176,10 +183,18 @@ horarios.forEach((horario) => {
         datos.horario = horario.value;
     });
 });
-
+//
+function mostrarAlerta (){
+    Swal.fire(
+        'Compra confirmada con exito!',
+        'Puede ver su carrito o deshacer la compra!',
+        'success'
+    );
+}
 // Llamamos al botón con id "confirmar" para agregar el evento click
 document.getElementById("confirmar").addEventListener("click", () => {
     
+    mostrarAlerta();
     // Almacenar los datos seleccionados en el localStorage
     localStorage.setItem("carrito", JSON.stringify(datos));
     // Ocultar el contenido actual
@@ -190,7 +205,7 @@ document.getElementById("confirmar").addEventListener("click", () => {
     // Agregar un botón de "Carrito" que muestra el contenido del carrito al hacer clic
     const carritoButton = document.createElement('button');
     carritoButton.textContent = 'Ver Carrito';
-    document.body.appendChild(carritoButton);
+    document.body.append(carritoButton);
 
     carritoButton.addEventListener('click', () => {
         // Recuperar los datos del localStorage
@@ -214,6 +229,7 @@ document.getElementById("confirmar").addEventListener("click", () => {
         document.body.appendChild(carritoDiv);
         const comfirmacioncompra = document.getElementById(`confirmcompra`);
         comfirmacioncompra.addEventListener(`click`, () => {
+            
             Swal.fire(
                 'Compra realizada con exito!',
                 'You clicked the button!',
